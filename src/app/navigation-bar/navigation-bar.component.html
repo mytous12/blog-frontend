@@ -1,1 +1,64 @@
-<p>navigation-bar works!</p>
+<nav class="nav navbar align-items-center justify-content-between py-0 position-sticky">
+  <div>
+    <h4><a class="brand font-weight-bold" (click)="home()">Simplified</a></h4>
+  </div>
+  <div class="py-2 d-flex">
+    <input class="form-control col-xl-12 col-lg-9 col-sm-6" type="text" placeholder="Search for Products"
+           [(ngModel)]="keyword"
+           name="search">
+    <button type="submit" class="d-flex align-items-center btn" (click)="startSearch()">
+      <i class="material-icons">
+        search
+      </i></button>
+  </div>
+  <div class="d-flex align-items-center justify-content-center">
+    <div *ngIf="!service.checkLogin(); else logOut">
+      <a (click)="login()" class="actions">
+        <i class="material-icons">account_circle</i>
+        <span>Login</span>
+      </a>
+    </div>
+    <ng-template #logOut>
+      <div>
+        <a class="actions" (click)="signOut()">
+          <i class="material-icons">account_circle</i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </ng-template>
+    <div *ngIf="!service.checkAdmin(); else users">
+      <a (click)="orders()" class="actions">
+        <i class="material-icons">favorite</i>
+        <span>Orders</span>
+      </a>
+    </div>
+    <ng-template #users>
+      <div (click)="navigateToUsers()">
+        <a class="actions">
+          <i class="material-icons">supervisor_account</i>
+          <span>Users</span>
+        </a>
+      </div>
+    </ng-template>
+    <div *ngIf="!service.checkAdmin(); else addProduct">
+      <div class="d-flex align-items-center justify-content-center">
+        <a (click)="cart()" class="actions">
+          <i class="material-icons">shopping_cart</i>
+          <span>My Cart</span>
+        </a>
+        <a (click)="profile()" class="actions">
+          <i class="material-icons">supervisor_account</i>
+          <span>Profile</span>
+        </a>
+      </div>
+    </div>
+    <ng-template #addProduct>
+      <div (click)="navigate()">
+        <a class="actions">
+          <i class="material-icons">add_shopping_cart</i>
+          <span>Add Product</span>
+        </a>
+      </div>
+    </ng-template>
+  </div>
+</nav>

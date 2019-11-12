@@ -1,0 +1,36 @@
+<div>
+  <div class="heading text-center">
+    <a (click)="home()" class="my-pointer">
+      <img class="my-logo" src=".\assets\logo-black.png" alt="Simplified">
+    </a>
+  </div>
+  <div class="d-flex flex-column align-items-center my-3">
+    <div class="form-box border">
+      <div class="login-text">Login</div>
+      <div *ngIf="invalidLogin">
+        <div class="text-danger font-weight-bold">You have entered invalid credentials</div>
+      </div>
+      <form>
+        <div class="form-group was-validated">
+          <label for="email" class="format-text">Email or username:</label>
+          <input id="email" class="form-control" type="email" [(ngModel)]="email"
+                 [ngModelOptions]="{standalone: true}" [required]="true">
+          <div class="invalid-feedback">Enter your email</div>
+        </div>
+        <div class="form-group was-validated">
+          <label for="password" class="format-text">Password:</label>
+          <input id="password" class="form-control" type="password" [(ngModel)]="password"
+                 [ngModelOptions]="{standalone: true}"
+                 [required]="true" [minLength]="5">
+          <div class="invalid-feedback">Enter your password</div>
+        </div>
+        <div class="form-group">
+          <button class="btn w-100" (click)="login()">Login</button>
+        </div>
+      </form>
+    </div>
+    <div class="format-text py-2">
+      New to Shoppers Stop? <a routerLink="/sign-up">Sign Up</a> here
+    </div>
+  </div>
+</div>
