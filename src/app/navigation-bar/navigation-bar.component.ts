@@ -11,6 +11,7 @@ import {HttpClientService} from '../http-client.service';
 })
 export class NavigationBarComponent implements OnInit {
   private keyword;
+  private name;
 
   constructor(private router: Router, private authService: AuthenticationService, private httpService: HttpClientService,
               private service: AppService, private route: ActivatedRoute) {
@@ -18,12 +19,19 @@ export class NavigationBarComponent implements OnInit {
 
   ngOnInit() {
     this.keyword = localStorage.getItem('keyword');
+    if (this.service.checkLogin()) {
+      this.httpService.getName().subscribe((data) => {
+        this.name = data;
+        localStorage.setItem('name', this.name);
+      });
+    }
   }
 
   signOut() {
     this.authService.signOut().subscribe(data => {
       this.service.loggingOut();
       localStorage.removeItem('token');
+      localStorage.removeItem('name');
       localStorage.removeItem('admin');
       localStorage.removeItem('category');
       localStorage.removeItem('edit');
@@ -31,35 +39,6 @@ export class NavigationBarComponent implements OnInit {
       localStorage.removeItem('keyword');
       this.router.navigate(['home']);
     });
-  }
-
-  orders() {
-    if (!this.service.checkLogin()) {
-      localStorage.setItem('path', '/order-history');
-      this.router.navigate(['/login']);
-    } else {
-      this.router.navigate(['/order-history']);
-
-    }
-  }
-
-  cart() {
-    if (!this.service.checkLogin()) {
-      localStorage.setItem('path', '/cart');
-      this.router.navigate(['/login']);
-    } else {
-      this.router.navigate(['/cart']);
-
-    }
-  }
-
-  navigate() {
-    this.service.edit(false);
-    this.router.navigate(['add-product']);
-  }
-
-  navigateToUsers() {
-    this.router.navigate(['users']);
   }
 
   startSearch() {
@@ -72,15 +51,35 @@ export class NavigationBarComponent implements OnInit {
     });
   }
 
-  profile() {
-    this.router.navigate(['profile']);
-  }
-
   login() {
     this.router.navigate(['login']);
   }
 
   home() {
     this.router.navigate(['home']);
+  }
+
+  signUp() {
+    this.router.navigate(['sign-up']);
+  }
+
+  write() {
+    this.router.navigate(['write']);
+  }
+
+  navigate() {
+    if (this.service.checkLogin()) {
+      this.router.navigate(['news-feed']);
+    } else {
+      this.home();
+    }
+  }
+
+  myProfile() {
+    this.router.navigate(['my-profile']);
+  }
+
+  myPosts() {
+    this.router.navigate(['my-posts']);
   }
 }

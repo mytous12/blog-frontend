@@ -1,0 +1,41 @@
+<app-navigation-bar></app-navigation-bar>
+<div class="container">
+  <div *ngIf="groups.length!==0;else empty">
+    <div class="row">
+      <div class="col-6">
+        <div *ngFor="let group of groups">
+          <div>
+            Name : {{group.name}}
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <table class="table table-hover">
+          <thead class="text-center">
+          <tr>
+            <th>Name:</th>
+            <th>Add/Remove</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let subscriber of subscribers" class="text-center">
+            <td>
+              <div>
+                {{subscriber.subscriber.name}}
+              </div>
+            </td>
+            <td>
+              <div>
+                <button class="btn">Add</button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <ng-template #empty>
+    <h1>OOps!! You dont have any groups, why don't you create some</h1>
+  </ng-template>
+</div>

@@ -12,9 +12,9 @@
       </div>
       <form>
         <div class="form-group was-validated">
-          <label for="email" class="format-text">Email or username:</label>
+          <label for="email" class="format-text">Email:</label>
           <input id="email" class="form-control" type="email" [(ngModel)]="email"
-                 [ngModelOptions]="{standalone: true}" [required]="true">
+                 [ngModelOptions]="{standalone: true}" [required]="true" [minLength]="5">
           <div class="invalid-feedback">Enter your email</div>
         </div>
         <div class="form-group was-validated">

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       (data) => {
         this.service.isLoggedIn(true);
         this.invalidLogin = false;
-        this.home();
+        this.router.navigate(['news-feed']);
       }, (error) => {
         this.invalidLogin = true;
         this.email = undefined;

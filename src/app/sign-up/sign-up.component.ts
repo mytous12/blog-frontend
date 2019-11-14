@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../authentication.service';
 import {Router} from '@angular/router';
-import {error} from 'util';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,6 +21,9 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
+    // if (this.email === undefined || this.password === undefined || this.name === undefined) {
+    //
+    // }
     this.authService.signUp({
       email: this.email,
       password: this.password,

@@ -1,64 +1,58 @@
-<nav class="nav navbar align-items-center justify-content-between py-0 position-sticky">
-  <div>
-    <h4><a class="brand font-weight-bold" (click)="home()">Simplified</a></h4>
-  </div>
-  <div class="py-2 d-flex">
-    <input class="form-control col-xl-12 col-lg-9 col-sm-6" type="text" placeholder="Search for Products"
-           [(ngModel)]="keyword"
-           name="search">
-    <button type="submit" class="d-flex align-items-center btn" (click)="startSearch()">
-      <i class="material-icons">
-        search
-      </i></button>
-  </div>
-  <div class="d-flex align-items-center justify-content-center">
-    <div *ngIf="!service.checkLogin(); else logOut">
-      <a (click)="login()" class="actions">
-        <i class="material-icons">account_circle</i>
-        <span>Login</span>
-      </a>
+<div class="container-fluid">
+  <nav class="nav navbar align-items-center justify-content-between py-0 sticky-top pt-2">
+    <div class="pl-sm-5">
+      <h2><a class="brand font-weight-bold my-pointer" (click)="navigate()">Simplified</a></h2>
     </div>
-    <ng-template #logOut>
+    <div *ngIf="service.checkLogin();">
+      <div class="py-2 d-flex">
+        <input class="form-control col-xl-12 col-lg-9 col-sm-6" type="text" placeholder="Search for Products"
+               [(ngModel)]="keyword"
+               name="search">
+        <button type="submit" class="d-flex align-items-center btn" (click)="startSearch()">
+          <i class="material-icons">
+            search
+          </i></button>
+      </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center pr-sm-5">
       <div>
-        <a class="actions" (click)="signOut()">
-          <i class="material-icons">account_circle</i>
-          <span>Logout</span>
-        </a>
-      </div>
-    </ng-template>
-    <div *ngIf="!service.checkAdmin(); else users">
-      <a (click)="orders()" class="actions">
-        <i class="material-icons">favorite</i>
-        <span>Orders</span>
-      </a>
-    </div>
-    <ng-template #users>
-      <div (click)="navigateToUsers()">
         <a class="actions">
-          <i class="material-icons">supervisor_account</i>
-          <span>Users</span>
+          Subscribe
         </a>
       </div>
-    </ng-template>
-    <div *ngIf="!service.checkAdmin(); else addProduct">
-      <div class="d-flex align-items-center justify-content-center">
-        <a (click)="cart()" class="actions">
-          <i class="material-icons">shopping_cart</i>
-          <span>My Cart</span>
+      <div>
+        <a class="actions" (click)="write()">
+          Write
         </a>
-        <a (click)="profile()" class="actions">
-          <i class="material-icons">supervisor_account</i>
-          <span>Profile</span>
+      </div>
+      <div *ngIf="!service.checkLogin(); else logOut">
+        <a (click)="login()" class="actions">
+          Login
+        </a>
+      </div>
+      <ng-template #logOut>
+        <div class="dropdown my-pointer">
+          <a class="drop actions">{{name}}</a>
+          <div class="dropdown-content">
+            <a class="actions" (click)="myPosts()">
+              My Posts
+            </a>
+            <a class="actions" (click)="myProfile()">
+              My Profile
+            </a>
+            <a class="actions" (click)="signOut()">
+              Logout
+            </a>
+          </div>
+        </div>
+      </ng-template>
+      <div *ngIf="!service.checkLogin()">
+        <a class="actions" (click)="signUp()">
+          <button class="btn my-btn">
+            Get Started
+          </button>
         </a>
       </div>
     </div>
-    <ng-template #addProduct>
-      <div (click)="navigate()">
-        <a class="actions">
-          <i class="material-icons">add_shopping_cart</i>
-          <span>Add Product</span>
-        </a>
-      </div>
-    </ng-template>
-  </div>
-</nav>
+  </nav>
+</div>
