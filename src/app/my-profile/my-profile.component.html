@@ -17,6 +17,15 @@
   </div>
   <div class="col-9">
     <div class="mt-3 px-4">
+      <h3 class="text-center pb-2 fd">Hello there, {{shortName}}</h3>
+      <div class="d-flex justify-content-center pb-4">
+        <div class="my-text pr-4 my-pointer" (click)="navigate()">
+          Subscribers {{subscribers.length}}
+        </div>
+        <div class="my-text my-pointer" (click)="navigate()">
+          Subscriptions {{subscriptions.length}}
+        </div>
+      </div>
       <div class="d-flex flex-column align-items-center justify-content-center">
         <div class="form-group">
           <label for="name">Name:</label>

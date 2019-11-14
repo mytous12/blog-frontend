@@ -21,6 +21,8 @@ export class NewsFeedComponent implements OnInit {
   }
 
   navigate(id: any) {
+    this.service.viewPost(id).subscribe((data) => {
+    });
     this.router.navigate(['post', id]);
   }
 }

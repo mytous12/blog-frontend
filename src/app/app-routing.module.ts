@@ -10,6 +10,9 @@ import {PostComponent} from './post/post.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {MyPostsComponent} from './my-posts/my-posts.component';
 import {MyGroupsComponent} from './my-groups/my-groups.component';
+import {SearchComponent} from './search/search.component';
+import {SubscriptionsComponent} from './subscriptions/subscriptions.component';
+import {ProfileComponent} from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -23,6 +26,9 @@ const routes: Routes = [
   {path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuardService]},
   {path: 'my-posts', component: MyPostsComponent, canActivate: [AuthGuardService]},
   {path: 'my-groups', component: MyGroupsComponent, canActivate: [AuthGuardService]},
+  {path: 'search/:q', component: SearchComponent, canActivate: [AuthGuardService]},
+  {path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuardService]},
+  {path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
@@ -33,4 +39,4 @@ export class AppRoutingModule {
 }
 
 export const routingComponents = [HomeComponent, LoginComponent, SignUpComponent, NewsFeedComponent, WriteComponent, PostComponent
-  , MyProfileComponent, MyPostsComponent, MyGroupsComponent];
+  , MyProfileComponent, MyPostsComponent, MyGroupsComponent, SearchComponent, SubscriptionsComponent, ProfileComponent];

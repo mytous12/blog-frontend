@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClientService} from '../http-client.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
@@ -13,16 +14,26 @@ export class MyProfileComponent implements OnInit {
   email: any;
   password: any;
   private profile;
+  private shortName;
+  private subscribers;
+  private subscriptions;
 
-  constructor(private service: HttpClientService) {
+  constructor(private service: HttpClientService, private router: Router) {
   }
 
   ngOnInit() {
+    this.shortName = localStorage.getItem('name');
     this.service.getProfile().subscribe((data) => {
       this.profile = data;
       this.name = this.profile.name;
       this.email = this.profile.email;
       this.password = this.profile.password;
+    });
+    this.service.getSubscribers().subscribe((data) => {
+      this.subscribers = data;
+    });
+    this.service.getSubscriptions().subscribe((data) => {
+      this.subscriptions = data;
     });
   }
 
@@ -42,4 +53,7 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
+  navigate() {
+    this.router.navigate(['subscriptions']);
+  }
 }

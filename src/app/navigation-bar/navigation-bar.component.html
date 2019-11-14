@@ -5,7 +5,7 @@
     </div>
     <div *ngIf="service.checkLogin();">
       <div class="py-2 d-flex">
-        <input class="form-control col-xl-12 col-lg-9 col-sm-6" type="text" placeholder="Search for Products"
+        <input class="form-control col-xl-12 col-lg-9 col-sm-6" type="text" placeholder="Search"
                [(ngModel)]="keyword"
                name="search">
         <button type="submit" class="d-flex align-items-center btn" (click)="startSearch()">
@@ -15,11 +15,6 @@
       </div>
     </div>
     <div class="d-flex align-items-center justify-content-center pr-sm-5">
-      <div>
-        <a class="actions">
-          Subscribe
-        </a>
-      </div>
       <div>
         <a class="actions" (click)="write()">
           Write

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AuthenticationService} from '../authentication.service';
 import {AppService} from '../app.service';
 import {HttpClientService} from '../http-client.service';
@@ -18,7 +18,9 @@ export class NavigationBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.keyword = localStorage.getItem('keyword');
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.keyword = params.get('q');
+    });
     if (this.service.checkLogin()) {
       this.httpService.getName().subscribe((data) => {
         this.name = data;
@@ -42,13 +44,7 @@ export class NavigationBarComponent implements OnInit {
   }
 
   startSearch() {
-    localStorage.setItem('keyword', this.keyword);
-    this.httpService.raiseKeyword(this.keyword);
-    this.router.navigate(['product-list/search'], {
-      queryParams: {
-        q: this.keyword
-      }
-    });
+    this.router.navigate(['search', this.keyword]);
   }
 
   login() {

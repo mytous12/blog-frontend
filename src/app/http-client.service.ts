@@ -1,20 +1,11 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpClientService {
-  private keyword: string;
-  eventEmitter: EventEmitter<string>;
-
   constructor(private http: HttpClient) {
-    this.eventEmitter = new EventEmitter<string>();
-  }
-
-  raiseKeyword(keyword: string): void {
-    this.keyword = keyword;
-    this.eventEmitter.emit(keyword);
   }
 
   getName() {
@@ -91,5 +82,45 @@ export class HttpClientService {
   getSubscribers() {
     const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
     return this.http.get('http://localhost:8082/subscriber/get-subscribers', {headers});
+  }
+
+  getSubscriptions() {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/subscriber/subscription', {headers});
+  }
+
+  searchByCategory(query: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/get-by-category?category=' + query, {headers});
+  }
+
+  viewPost(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/view?id=' + id, {headers});
+  }
+
+  searchByTitle(query: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/get-by-title?title=' + query, {headers});
+  }
+
+  searchByDescription(query: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/get-by-description?desc=' + query, {headers});
+  }
+
+  searchByAuthor(query: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/get-by-author-name?name=' + query, {headers});
+  }
+
+  getUserById(id) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/user/get-by-id?id=' + id, {headers});
+  }
+
+  getPostsByAuthor(id) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/get-by-author?id=' + id, {headers});
   }
 }

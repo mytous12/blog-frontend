@@ -1,0 +1,47 @@
+<app-navigation-bar></app-navigation-bar>
+<div class="container pt-4">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <div class="text-center fd">My Subscribers</div>
+      <table class="table table-hover text-center">
+        <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of subscribers" (click)="navigate(i.subscriber.id)">
+          <td class="my-pointer">{{i.subscriber.name}}</td>
+          <td class="my-pointer">{{i.subscriber.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <div class="text-center fd" >My Subscriptions</div>
+      <table class="table table-hover text-center">
+        <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of subscriptions" (click)="navigate(i.author.id)">
+          <td class="my-pointer">{{i.author.name}}</td>
+          <td class="my-pointer">{{i.author.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
