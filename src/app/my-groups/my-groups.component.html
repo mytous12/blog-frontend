@@ -1,37 +1,26 @@
 <app-navigation-bar></app-navigation-bar>
 <div class="container">
+  <div class="form-inline pt-3">
+    <label class="mr-3" for="name">Group name:</label>
+    <input [(ngModel)]="name" class="form-control mr-3" id="name" name="name" placeholder="Name" type="text">
+    <button (click)="create()" class="btn my-btn">Create</button>
+  </div>
   <div *ngIf="groups.length!==0;else empty">
-    <div class="row">
-      <div class="col-6">
-        <div *ngFor="let group of groups">
-          <div>
-            Name : {{group.name}}
+    <div class="row pt-4">
+      <div *ngFor="let group of groups">
+        <div (click)="navigate(group.userGroups.id)" class="card my-pointer">
+          <div class="card-body">
+            <div>
+              Group Name : {{group.userGroups.name}}
+            </div>
+            <div>
+              Group Owner : {{group.userGroups.owner.name}}
+            </div>
+            <div>
+              Group Members : {{group.userGroups.size}}
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-6">
-        <table class="table table-hover">
-          <thead class="text-center">
-          <tr>
-            <th>Name:</th>
-            <th>Add/Remove</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let subscriber of subscribers" class="text-center">
-            <td>
-              <div>
-                {{subscriber.subscriber.name}}
-              </div>
-            </td>
-            <td>
-              <div>
-                <button class="btn">Add</button>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>

@@ -23,8 +23,11 @@
                   {{post.date|date:'mediumDate'}}
                 </div>
                 <div class="d-flex justify-content-center">
-                  <div class="my-pointer">
+                  <div class="my-pointer pr-3">
                     <a class="text-muted" (click)="delete(post.id)">Delete</a>
+                  </div>
+                  <div (click)="navigateToEdit(post.id)" class="my-pointer">
+                    <a class="text-muted">Edit</a>
                   </div>
                 </div>
               </div>

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   private email;
   private password;
   private invalidLogin = false;
+  private fields = false;
 
   constructor(private router: Router, private service: AppService, private authService: AuthenticationService) {
   }
@@ -24,17 +25,22 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.authenticate(this.email, this.password).subscribe(
-      (data) => {
-        this.service.isLoggedIn(true);
-        this.invalidLogin = false;
-        this.router.navigate(['news-feed']);
-      }, (error) => {
-        this.invalidLogin = true;
-        this.email = undefined;
-        this.password = undefined;
-      }
-    );
+    if (this.email === undefined || this.email === '' ||
+      this.password === undefined || this.password === '') {
+      this.fields = true;
+    } else {
+      this.authService.authenticate(this.email, this.password).subscribe(
+        (data) => {
+          this.service.isLoggedIn(true);
+          this.invalidLogin = false;
+          this.router.navigate(['news-feed']);
+        }, (error) => {
+          this.invalidLogin = true;
+          this.email = undefined;
+          this.password = undefined;
+        }
+      );
+    }
   }
 
   home() {

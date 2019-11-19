@@ -16,7 +16,8 @@
                 {{post.description}}
               </div>
               <div>
-                Contributed by : {{post.author.name}}
+                Contributed by : <span (click)="navigateToProfile(post.author.id)" class="text-info"
+              >{{post.author.name}}</span>
               </div>
               <div class="text-muted">
                 {{post.date|date:'mediumDate'}}
@@ -24,6 +25,31 @@
             </div>
             <div>
               <img [src]="post.image" [alt]="post.title" class="my-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3 pl-2">
+      <h4 class="pt-3 pb-2 pl-4">Popular Posts</h4>
+      <hr class="pr-5 bg-dark w-75">
+      <div>
+        <div *ngFor="let i of popularPosts; let j=index" class="card border-0 mb-4 position-sticky">
+
+          <div class="d-flex my-pointer">
+            <div class="d-flex flex-column">
+              <div class="d-flex">
+                <div (click)="navigate(i.id)" class="fontSize1 text-muted pr-3 pt-3">{{j + 1}}</div>
+                <div>
+                  <div (click)="navigate(i.id)" class="text-muted">{{i.category.toUpperCase()}}</div>
+                  <div><h5>{{i.title}}</h5></div>
+                  <div>
+                    Contributed by : <span (click)="navigateToProfile(i.author.id)" class="text-info"
+                  >{{i.author.name}}</span>
+                  </div>
+                  <div class="text-muted">{{i.date | date: 'mediumDate'}}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

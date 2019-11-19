@@ -25,8 +25,15 @@ export class MyPostsComponent implements OnInit {
   }
 
   delete(id: any) {
-    this.service.delete(id).subscribe((data) => {
-      this.posts = data;
-    });
+    if (confirm('you want to delete post?')) {
+      this.service.delete(id).subscribe((data) => {
+        alert('post deleted successfully');
+        this.posts = data;
+      });
+    }
+  }
+
+  navigateToEdit(id: any) {
+    this.router.navigate(['edit-post/' + id]);
   }
 }

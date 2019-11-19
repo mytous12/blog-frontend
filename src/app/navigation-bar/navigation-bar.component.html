@@ -27,7 +27,12 @@
       </div>
       <ng-template #logOut>
         <div class="dropdown my-pointer">
-          <a class="drop actions">{{name}}</a>
+          <div class="d-flex align-items-center actions">
+            <a class="drop">{{name}}</a>
+            <i class="material-icons">
+              arrow_drop_down
+            </i>
+          </div>
           <div class="dropdown-content">
             <a class="actions" (click)="myPosts()">
               My Posts

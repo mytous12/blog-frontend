@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClientService} from '../http-client.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-groups',
@@ -10,8 +11,9 @@ export class MyGroupsComponent implements OnInit {
 
   private groups;
   private subscribers;
+  name: any;
 
-  constructor(private service: HttpClientService) {
+  constructor(private service: HttpClientService, private router: Router) {
   }
 
   ngOnInit() {
@@ -23,4 +25,15 @@ export class MyGroupsComponent implements OnInit {
     });
   }
 
+  navigate(id: any) {
+    this.router.navigate(['group-details', id]);
+  }
+
+  create() {
+    this.service.createGroup({
+      name: this.name
+    }).subscribe((data) => {
+      this.groups = data;
+    });
+  }
 }

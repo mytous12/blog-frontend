@@ -17,6 +17,8 @@ export class MyProfileComponent implements OnInit {
   private shortName;
   private subscribers;
   private subscriptions;
+  private invalid = false;
+  private short = false;
 
   constructor(private service: HttpClientService, private router: Router) {
   }
@@ -42,15 +44,22 @@ export class MyProfileComponent implements OnInit {
   }
 
   update() {
-    this.service.updateProfile({
-      name: this.name,
-      email: this.email,
-      password: this.password
-    }).subscribe((data) => {
-      localStorage.setItem('token', btoa(this.email + ':' + this.password));
-      this.profile = data;
-      this.isEditable = false;
-    });
+    if (this.email === undefined || this.password === undefined || this.name === undefined ||
+      this.email === '' || this.password === '' || this.name === '') {
+      this.invalid = true;
+    } else if (this.password.length < 6) {
+      this.short = true;
+    } else {
+      this.service.updateProfile({
+        name: this.name,
+        email: this.email,
+        password: this.password
+      }).subscribe((data) => {
+        localStorage.setItem('token', btoa(this.email + ':' + this.password));
+        this.profile = data;
+        this.isEditable = false;
+      });
+    }
   }
 
   navigate() {

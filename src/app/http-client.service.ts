@@ -123,4 +123,93 @@ export class HttpClientService {
     const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
     return this.http.get('http://localhost:8082/post/get-by-author?id=' + id, {headers});
   }
+
+  getMembers(id) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/groups/get-members?groupId=' + id, {headers});
+  }
+
+  groupById(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/groups/get-by-id?id=' + id, {headers});
+  }
+
+  remove(id: any, memberId: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/groups/remove-member?groupId=' + id + '&memberId=' + memberId,
+      null, {headers});
+  }
+
+  isMember(id: any, memberId: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/groups/is-member?groupId=' + id + '&memberId=' + memberId,
+      {headers});
+  }
+
+  add(id: any, memberId: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/groups/add-member?groupId=' + id + '&memberId=' + memberId,
+      null, {headers});
+  }
+
+  getPopularPosts() {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/popular', {headers});
+  }
+
+  editPost(id, post) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/post/edit?id=' + id, post, {headers});
+  }
+
+  deleteGroup(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/groups/delete?id=' + id, null, {headers});
+  }
+
+  createGroup(group) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/groups/create', group, {headers});
+  }
+
+  isOwner(id) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/groups/is-owner?groupId=' + id, {headers});
+  }
+
+  leaveGroup(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/groups/leave-group?groupId=' + id, null, {headers});
+  }
+
+  privatePosts(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/groups/get-posts?groupId=' + id, {headers});
+  }
+
+  deleteComment(id: any, commentId: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/comment/delete-comment?postId=' + id + '&commentId=' + commentId,
+      null, {headers});
+  }
+
+  getLikes(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/get-likes?id=' + id, {headers});
+  }
+
+  isLiked(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.get('http://localhost:8082/post/is-liked?id=' + id, {headers});
+  }
+
+  likePost(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/post/like?id=' + id, null, {headers});
+  }
+
+  unlike(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/post/unlike?id=' + id, null, {headers});
+  }
 }

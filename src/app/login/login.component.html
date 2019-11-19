@@ -10,6 +10,9 @@
       <div *ngIf="invalidLogin">
         <div class="text-danger font-weight-bold">You have entered invalid credentials</div>
       </div>
+      <div *ngIf="fields">
+        <div class="text-danger font-weight-bold">All fields are mandatory</div>
+      </div>
       <form>
         <div class="form-group was-validated">
           <label for="email" class="format-text">Email:</label>

@@ -25,26 +25,36 @@ export class WriteComponent implements OnInit {
   }
 
   publish() {
-    if (this.isPrivate === false) {
-      this.privateValue = 0;
+    if (this.category === undefined || this.category === '' ||
+      this.title === undefined || this.title === '' ||
+      this.description === undefined || this.description === '' ||
+      this.isPrivate === undefined ||
+      this.image === undefined || this.image === '' ||
+      this.content === undefined || this.content === ''
+    ) {
+      alert('all fields are required');
     } else {
-      this.privateValue = 1;
+      if (this.isPrivate === false) {
+        this.privateValue = 0;
+      } else {
+        this.privateValue = 1;
+      }
+      this.service.publish({
+        title: this.title,
+        description: this.description,
+        image: this.image,
+        category: this.category,
+        isPrivate: this.privateValue,
+        content: this.content
+      }).subscribe((data) => {
+        this.title = undefined;
+        this.description = undefined;
+        this.image = undefined;
+        this.category = undefined;
+        this.privateValue = undefined;
+        this.content = undefined;
+        this.router.navigate(['news-feed']);
+      });
     }
-    this.service.publish({
-      title: this.title,
-      description: this.description,
-      image: this.image,
-      category: this.category,
-      isPrivate: this.privateValue,
-      content: this.content
-    }).subscribe((data) => {
-      this.title = undefined;
-      this.description = undefined;
-      this.image = undefined;
-      this.category = undefined;
-      this.privateValue = undefined;
-      this.content = undefined;
-      this.router.navigate(['news-feed']);
-    });
   }
 }

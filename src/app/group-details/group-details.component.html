@@ -1,0 +1,99 @@
+<app-navigation-bar></app-navigation-bar>
+<div class="container pt-4">
+  <div class="d-flex pb-4">
+    <h3 class="text-center fd mr-auto ml-auto">Group {{group.name}}</h3>
+    <div *ngIf="isOwner; else elseBlock">
+      <button (click)="deleteGroup()" class="btn my-btn">Delete Group</button>
+    </div>
+    <ng-template #elseBlock>
+      <button (click)="leaveGroup()" class="btn my-btn">Leave Group</button>
+    </ng-template>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h5 class="text-center fd">Group Members</h5>
+      <table class="table table-hover text-center">
+        <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th *ngIf="isOwner">
+            Action
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of members">
+          <td (click)="navigate(i.users.id)" class="my-pointer">{{i.users.name}}</td>
+          <td (click)="navigate(i.users.id)" class="my-pointer">{{i.users.email}}</td>
+          <td *ngIf="isOwner">
+            <button (click)="remove(i.users.id)" class="btn my-btn">Remove</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="isOwner" class="col-6">
+      <h5 class="text-center fd">Subscribers</h5>
+      <table class="table table-hover text-center">
+        <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Email
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of subscribers">
+          <td (click)="navigate(i.subscriber.id)" class="my-pointer">{{i.subscriber.name}}</td>
+          <td (click)="navigate(i.subscriber.id)" class="my-pointer">{{i.subscriber.email}}</td>
+          <td>
+            <div>
+              <button (click)="add(i.subscriber.id)" class="btn my-btn">Add</button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="fd pt-3">
+    <h3>Private Posts Of Group Owner</h3>
+  </div>
+  <div *ngFor="let post of posts">
+    <div (click)="navigateToPost(post.id)" class="card border-0 my-pointer pb-3">
+      <div class="d-flex card-body">
+        <div class="d-flex flex-column pr-5">
+          <div class="text-muted">
+            {{post.category.toUpperCase()}}
+          </div>
+          <div class="title">
+            {{post.title}}
+          </div>
+          <div class="desc-text">
+            {{post.description}}
+          </div>
+          <div>
+            Contributed by : {{post.author.name}}
+          </div>
+          <div class="text-muted">
+            {{post.date|date:'mediumDate'}}
+          </div>
+        </div>
+        <div>
+          <img [alt]="post.title" [src]="post.image" class="my-img">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

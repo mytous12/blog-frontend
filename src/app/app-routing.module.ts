@@ -13,6 +13,8 @@ import {MyGroupsComponent} from './my-groups/my-groups.component';
 import {SearchComponent} from './search/search.component';
 import {SubscriptionsComponent} from './subscriptions/subscriptions.component';
 import {ProfileComponent} from './profile/profile.component';
+import {GroupDetailsComponent} from './group-details/group-details.component';
+import {EditPostComponent} from './edit-post/edit-post.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path: 'search/:q', component: SearchComponent, canActivate: [AuthGuardService]},
   {path: 'subscriptions', component: SubscriptionsComponent, canActivate: [AuthGuardService]},
   {path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'group-details/:id', component: GroupDetailsComponent, canActivate: [AuthGuardService]},
+  {path: 'edit-post/:id', component: EditPostComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
@@ -39,4 +43,5 @@ export class AppRoutingModule {
 }
 
 export const routingComponents = [HomeComponent, LoginComponent, SignUpComponent, NewsFeedComponent, WriteComponent, PostComponent
-  , MyProfileComponent, MyPostsComponent, MyGroupsComponent, SearchComponent, SubscriptionsComponent, ProfileComponent];
+  , MyProfileComponent, MyPostsComponent, MyGroupsComponent, SearchComponent, SubscriptionsComponent, ProfileComponent,
+  GroupDetailsComponent, EditPostComponent];

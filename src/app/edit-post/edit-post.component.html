@@ -1,0 +1,53 @@
+<app-navigation-bar></app-navigation-bar>
+<div class="container">
+  <h3 class="text-center py-3">It's time you write your mind off</h3>
+  <form>
+    <div class="row">
+      <div class="col-4">
+        <div class="form-group">
+          <input [(ngModel)]="title" class="form-control" name="title" placeholder="Title"
+                 type="text">
+        </div>
+        <div class="form-group">
+          <input [(ngModel)]="description" class="form-control" name="description" placeholder="Description"
+                 type="text">
+        </div>
+        <div class="form-group">
+          <input [(ngModel)]="image" class="form-control" name="image" placeholder="Image URL"
+                 type="text">
+        </div>
+        <div class="form-group">
+          <select [(ngModel)]="category" class="custom-select" name="category">
+            <option value="">Select a Category</option>
+            <option value="health">Health</option>
+            <option value="lifestyle">Lifestyle</option>
+            <option value="love">Love</option>
+            <option value="self">Self</option>
+            <option value="social">Social</option>
+            <option value="tech">Tech</option>
+            <option value="women">Women</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <div class="custom-control custom-switch">
+            <input [(ngModel)]="isPrivate" class="custom-control-input" id="switch1" name="isPrivate"
+                   type="checkbox">
+            <label class="custom-control-label" for="switch1">Private</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="form-group">
+          <textarea [(ngModel)]="content" [maxLength]="10000" class="form-control no-resize" id="comment"
+                    name="content" placeholder="Write your content here" rows="13">
+          </textarea>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div>
+            <button (click)="publish()" class="btn my-btn" type="submit">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

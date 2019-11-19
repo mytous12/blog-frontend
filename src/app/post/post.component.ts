@@ -15,7 +15,8 @@ export class PostComponent implements OnInit {
   private comments;
   private isSubscribed;
   private user;
-
+  private likes;
+  private isLiked;
 
   constructor(private service: HttpClientService, private router: Router, private route: ActivatedRoute) {
   }
@@ -35,6 +36,12 @@ export class PostComponent implements OnInit {
     });
     this.service.getProfile().subscribe((data) => {
       this.user = data;
+    });
+    this.service.getLikes(this.id).subscribe((data) => {
+      this.likes = data;
+    });
+    this.service.isLiked(this.id).subscribe((data) => {
+      this.isLiked = data;
     });
   }
 
@@ -59,6 +66,34 @@ export class PostComponent implements OnInit {
     this.service.unsubscribe(id).subscribe((data) => {
       this.service.isSubscribed(id).subscribe((data1) => {
         this.isSubscribed = data1;
+      });
+    });
+  }
+
+  navigateToProfile(id: any) {
+    this.router.navigate(['profile', id]);
+  }
+
+  delete(commentId: any) {
+    this.service.deleteComment(this.id, commentId).subscribe((data) => {
+      this.comments = data;
+    });
+  }
+
+  like() {
+    this.service.likePost(this.id).subscribe((data) => {
+      this.likes = data;
+      this.service.isLiked(this.id).subscribe((data1) => {
+        this.isLiked = data1;
+      });
+    });
+  }
+
+  unlike() {
+    this.service.unlike(this.id).subscribe((data) => {
+      this.likes = data;
+      this.service.isLiked(this.id).subscribe((data1) => {
+        this.isLiked = data1;
       });
     });
   }

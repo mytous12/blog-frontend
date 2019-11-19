@@ -13,6 +13,8 @@ export class SignUpComponent implements OnInit {
   private email;
   private password;
   private exists = false;
+  private fields = false;
+  private short = false;
 
   constructor(private authService: AuthenticationService, private router: Router) {
   }
@@ -21,23 +23,28 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp() {
-    // if (this.email === undefined || this.password === undefined || this.name === undefined) {
-    //
-    // }
-    this.authService.signUp({
-      email: this.email,
-      password: this.password,
-      name: this.name
-    }).subscribe(
-      (data) => {
-        if (data === false) {
-          this.exists = true;
-          this.password = undefined;
-          this.email = undefined;
-        } else {
-          this.router.navigate(['login']);
-        }
-      });
+    if (this.email === undefined || this.password === undefined || this.name === undefined
+      || this.email === '' || this.password === '' || this.name === '') {
+      this.fields = true;
+    } else if (this.password.length < 6) {
+      this.short = true;
+    } else {
+      this.authService.signUp({
+        email: this.email,
+        password: this.password,
+        name: this.name
+      }).subscribe(
+        (data) => {
+          if (data === false) {
+            this.exists = true;
+            this.password = undefined;
+            this.email = undefined;
+          } else {
+            alert('Successfully Registered');
+            this.router.navigate(['login']);
+          }
+        });
+    }
   }
 
   home() {
