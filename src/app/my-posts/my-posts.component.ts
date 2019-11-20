@@ -25,7 +25,7 @@ export class MyPostsComponent implements OnInit {
   }
 
   delete(id: any) {
-    if (confirm('you want to delete post?')) {
+    if (confirm('Are you sure you want to delete this post ?')) {
       this.service.delete(id).subscribe((data) => {
         alert('post deleted successfully');
         this.posts = data;

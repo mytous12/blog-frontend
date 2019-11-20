@@ -58,8 +58,13 @@
             <div class="invalid-feedback">Enter password of min 6 characters</div>
           </div>
         </form>
-        <div *ngIf="isEditable">
-          <button type="submit" (click)="update()" class="btn">Save</button>
+        <div class="d-flex justify-content-center">
+          <div *ngIf="isEditable" class="pr-5">
+            <button (click)="update()" class="btn" type="submit">Save</button>
+          </div>
+          <div>
+            <button (click)="delete()" class="btn" type="submit">Delete Account</button>
+          </div>
         </div>
       </div>
     </div>

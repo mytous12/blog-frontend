@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClientService} from '../http-client.service';
 import {Router} from '@angular/router';
+import {AuthenticationService} from '../authentication.service';
+import {AppService} from '../app.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -20,7 +22,8 @@ export class MyProfileComponent implements OnInit {
   private invalid = false;
   private short = false;
 
-  constructor(private service: HttpClientService, private router: Router) {
+  constructor(private service: HttpClientService, private router: Router, private auth: AuthenticationService,
+              private appService: AppService) {
   }
 
   ngOnInit() {
@@ -64,5 +67,23 @@ export class MyProfileComponent implements OnInit {
 
   navigate() {
     this.router.navigate(['subscriptions']);
+  }
+
+  delete() {
+    if (confirm('Are you sure, you want to delete your account. ' +
+      'Doing so will erase all your data')) {
+      this.service.deleteAccount().subscribe((data) => {
+        this.appService.loggingOut();
+        localStorage.removeItem('token');
+        localStorage.removeItem('name');
+        localStorage.removeItem('admin');
+        localStorage.removeItem('category');
+        localStorage.removeItem('edit');
+        localStorage.removeItem('path');
+        localStorage.removeItem('keyword');
+        this.router.navigate(['home']);
+      });
+    }
+
   }
 }

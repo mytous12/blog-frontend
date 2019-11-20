@@ -36,7 +36,6 @@ export class NavigationBarComponent implements OnInit {
       localStorage.removeItem('name');
       localStorage.removeItem('admin');
       localStorage.removeItem('category');
-      localStorage.removeItem('edit');
       localStorage.removeItem('path');
       localStorage.removeItem('keyword');
       this.router.navigate(['home']);

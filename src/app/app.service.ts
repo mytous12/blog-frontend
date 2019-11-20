@@ -35,14 +35,4 @@ export class AppService {
     return JSON.parse(admin);
   }
 
-  edit(bool: boolean) {
-    localStorage.setItem('edit', String(bool));
-    return bool;
-  }
-
-  checkEdit() {
-    const edit = localStorage.getItem('edit');
-    return JSON.parse(edit);
-  }
-
 }

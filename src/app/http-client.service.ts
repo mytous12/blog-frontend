@@ -212,4 +212,14 @@ export class HttpClientService {
     const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
     return this.http.post('http://localhost:8082/post/unlike?id=' + id, null, {headers});
   }
+
+  deleteAccount() {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/user/delete', null, {headers});
+  }
+
+  deleteById(id: any) {
+    const headers = new HttpHeaders({Authorization: 'Basic ' + localStorage.getItem('token')});
+    return this.http.post('http://localhost:8082/admin/delete?id=' + id, null, {headers});
+  }
 }
