@@ -45,8 +45,10 @@ export class GroupDetailsComponent implements OnInit {
   }
 
   remove(memberId: any) {
-    if (this.isOwner) {
-      this.deleteGroup();
+    if (memberId === this.group.owner.id) {
+      if (confirm('Are you sure, you want to leave group, exiting will delete the group')) {
+        this.deleteGroup();
+      }
     } else {
       this.service.remove(this.id, memberId).subscribe((data) => {
         this.members = data;
